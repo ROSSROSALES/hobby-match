@@ -43,7 +43,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import BlenderIcon from '@mui/icons-material/Blender';
 import { Link } from "react-router-dom";
 
-import { SignOut } from "./firebase";
+import { SignOut } from "../firebase";
 
 
 const pages = [

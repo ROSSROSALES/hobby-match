@@ -16,15 +16,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/analytics';
-
-
-
-
-
-
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
-
 
 firebase.initializeApp({
     apiKey: "AIzaSyAOnYfYcGgrz5CBwlSj3NTW-Rzo6hQ85A8",
@@ -38,9 +30,6 @@ firebase.initializeApp({
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
-
-
-
 const useStyles = makeStyles({
   header: {
     display: "flex",
@@ -71,15 +60,8 @@ const useStyles = makeStyles({
   }
 });
 
-
-
 function App() {
-  
-  
-
   const [loading, setLoading] = useState(true)
-
-
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 6000)
@@ -88,25 +70,20 @@ function App() {
   const [user] = useAuthState(auth);
   console.log(user)
 
-  // const { photoURL } = auth.currentUser;
   useEffect(() => {
     async function sendMessage(e) {
       e.preventDefault();
-  
       const { photoURL } = auth.currentUser;
     }
   }, [user])
   
-
   const classes = useStyles();
 
   return (
-
-
     <>  
-
     {loading === false ? (
         <Router>
+
           <Header auth = { auth } /*photoURL= { photoURL }*//> 
             <Routes>
               
@@ -123,12 +100,12 @@ function App() {
               </Route>
 
             </Routes>
+            
         </Router>
         ) : (
           <LoadingScreen />
     )}
     </>
-    
   );
 };
 

@@ -3,14 +3,6 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/analytics';
 
-import { getFirestore } from "firebase/firestore"
-
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
-
-
-
-
 firebase.initializeApp({
     apiKey: "AIzaSyAOnYfYcGgrz5CBwlSj3NTW-Rzo6hQ85A8",
     authDomain: "anime-match-a5f94.firebaseapp.com",
@@ -25,8 +17,6 @@ const auth = firebase.auth();
 const firestore = firebase.firestore();
 const user = auth.currentUser
 
-
-
 function signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider);
@@ -36,6 +26,5 @@ function signInWithGoogle() {
 function SignOut() {
       auth.signOut()
 };
-
 
 export { signInWithGoogle, auth, firestore, user, SignOut };
