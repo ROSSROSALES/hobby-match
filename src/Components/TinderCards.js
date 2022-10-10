@@ -48,50 +48,49 @@ const useStyles = makeStyles({
   }
 });
 
+const anime_array = []
+function response() {
+ fetch("https://api.jikan.moe/v4/top/anime")
+ .then(response => response.json())
+ .then(function(result) {
+   for (var i=0; i<result.data.length; i++) {
+     anime_array.push(result.data[i])
+   }
+ })
+ .catch(error => console.error(error));
+ };
+response()
+
+// make sure to update the rules on firebase from false to true, based on timeframe to open
+async function onSwipe(direction) {
+  const { uid, photoURL } = auth.currentUser;
+  const userRef = firestore.collection('user');
+  await userRef.add({
+      text: direction,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      uid,
+      photoURL
+    })
+  console.log("You swiped: " + direction);
+};
+
+async function onCardLeftScreen(myIdentifier) {
+  const { uid, photoURL } = auth.currentUser;
+  const userRef = firestore.collection('user');
+  await userRef.add({
+      title: myIdentifier,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      uid,
+      photoURL
+    })
+  console.log(myIdentifier + " left the screen");
+};
+
 function TinderCards() {
-    const [topAnime, SetTopAnime] = useState([])
-    const GetTopAnime = async () => {
-        const temp = await fetch(`https://api.jikan.moe/v3/top/anime/1/bypopularity`)
-        .then(res => res.json());
-        console.log(temp)
-        SetTopAnime(temp.top);
-    }
-        
-    useEffect(() => {
-        GetTopAnime();
-        console.log("Top Anime");
-    }, []);
-    console.log(topAnime);
-
   const classes = useStyles();
-  const onSwipe = async (direction) => {
-    const { uid, photoURL } = auth.currentUser;
-    const userRef = firestore.collection('user');
-    await userRef.add({
-        text: direction,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        uid,
-        photoURL
-      })
-    console.log("You swiped: " + direction);
-  };
-
-  const onCardLeftScreen = async (myIdentifier) => {
-    const { uid, photoURL } = auth.currentUser;
-    const userRef = firestore.collection('user');
-    await userRef.add({
-        title: myIdentifier,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        uid,
-        photoURL
-      })
-    console.log(myIdentifier + " left the screen");
-  };
-
   return (
     <div className={classes.container}>
-      {topAnime.map((anime) => (
-        
+      {anime_array.map((anime) => (  
         <TinderCard
           className={classes.swipe}
           onSwipe={onSwipe}
@@ -102,7 +101,7 @@ function TinderCards() {
         >
           <div className={classes.card}>
             <div
-              style={{ backgroundImage: `url(${anime.image_url})` }}
+              style={{ backgroundImage: `url(${anime.images.jpg.large_image_url})` }}
               className={classes.image}
             >
               <Typography className={classes.title} variant="h5">
