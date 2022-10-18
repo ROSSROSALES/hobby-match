@@ -7,6 +7,8 @@ import { auth, firestore } from "../firebase";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/analytics';
+import { collection, doc, setDoc, Timestamp, addDoc } from "firebase/firestore"; 
+
 
 const useStyles = makeStyles({
   card: {
@@ -21,7 +23,7 @@ const useStyles = makeStyles({
   },
   image: {
     position: "relative",
-    height: "70vh",
+    height: "75vh",
     borderRadius: "7px",
     backgroundSize: "cover",
     backgroundPosition: "center"
@@ -36,15 +38,18 @@ const useStyles = makeStyles({
     position: "absolute"
   },
   title: {
-    position: "absolute",
+    font: "Verdana, sans-serif",
+    position: "center",
     margin: 10,
-    color: "orange"
+    color: "black"
   },
   text: {
     // position: "absolute",
+    font: "Verdana, sans-serif",
     margin: 5,
     variant: "p3",
-    color: 'black'
+    color: 'black',
+    position: "right",
   }
 });
 
@@ -56,34 +61,43 @@ function response() {
    for (var i=0; i<result.data.length; i++) {
      anime_array.push(result.data[i])
    }
+   console.log("this is the curr user", auth.currentUser)
+   const { uid, photoURL } = auth.currentUser;
+   console.log("This is uid", uid)
+   console.log("this is profileURL", photoURL)
+   //console.log(firestore)
  })
  .catch(error => console.error(error));
  };
 response()
 
-// make sure to update the rules on firebase from false to true, based on timeframe to open
-async function onSwipe(direction) {
-  const { uid, photoURL } = auth.currentUser;
-  const userRef = firestore.collection('user');
-  await userRef.add({
-      text: direction,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      uid,
-      photoURL
-    })
-  console.log("You swiped: " + direction);
-};
+//const userRef = firestore('user')
+//console.log(userRef)
 
-async function onCardLeftScreen(myIdentifier) {
+// make sure to update the rules on firebase from false to true, based on timeframe to open
+// Need to find a way to add to firebase
+async function onSwipe(direction, anime) {
+  if (direction == 'left') {
+    direction = false
+  } else {
+    direction = true
+  }
   const { uid, photoURL } = auth.currentUser;
-  const userRef = firestore.collection('user');
-  await userRef.add({
-      title: myIdentifier,
+  console.log("anime title", anime)
+  console.log("anime title", direction)
+  console.log("uid", uid)
+  console.log("PhotoURL", photoURL)
+// new way to add document to firestore database
+  await addDoc(collection(firestore, 'users'), { // Always needs even number of 'user', 'user' arguments, what you are extracting from firestore db
+      //text: direction,
+      //date: Timestamp,
+      animeTitle: anime,
+      like: direction,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      uid,
-      photoURL
-    })
-  console.log(myIdentifier + " left the screen");
+      user: uid,
+      photo: photoURL
+  });
+  console.log("liked: " + direction);
 };
 
 function TinderCards() {
@@ -93,8 +107,8 @@ function TinderCards() {
       {anime_array.map((anime) => (  
         <TinderCard
           className={classes.swipe}
-          onSwipe={onSwipe}
-          onCardLeftScreen={() => onCardLeftScreen(anime.title)}
+          onSwipe={(direction) => onSwipe(direction, anime.title)}
+          
           preventSwipe={["up", "down"]}
           key={anime.title}
           backgroundColor="black"
@@ -104,11 +118,11 @@ function TinderCards() {
               style={{ backgroundImage: `url(${anime.images.jpg.large_image_url})` }}
               className={classes.image}
             >
-              <Typography className={classes.title} variant="h5">
-                {anime.title}
-              </Typography>
             </div>
-            <Typography className={classes.text}>rating: {anime.score} </Typography>
+            <Typography className={classes.title} variant="h5">
+                {/*anime.title*/}
+              </Typography>
+            <Typography className={classes.text}> {/*anime.score*/} </Typography>
           </div>
         </TinderCard>
       ))}
