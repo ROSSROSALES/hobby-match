@@ -1,31 +1,3 @@
-/*import React from 'react';
-import "./Header.css";
-import ChatIcon from '@mui/icons-material/Chat';
-import PersonIcon from '@mui/icons-material/Person';
-import { Link } from "react-router-dom";
-
-
-function Header() {
-  return (
-    
-    <div className="header">
-        <Link to="/">
-            <PersonIcon className="header_icon"/>
-        </Link>
-        <Link to="/chat">
-            <ChatIcon className="header_icon"/>
-        </Link>
-      </div>
-  )
-}
-
-export default Header;
-
-<Link to={setting.path} onClick={handleLinkClick} ></Link>
-
-*/
-
- 
 import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -39,7 +11,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import BlenderIcon from '@mui/icons-material/Blender';
 import { Link } from "react-router-dom";
 
@@ -60,7 +31,7 @@ const pages = [
 const settings = [
     {
         title: 'Profile', 
-        path: '/'
+        path: '/history'
     },
     {
         title: 'Account', 

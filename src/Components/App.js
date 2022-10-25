@@ -12,53 +12,39 @@ import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import "./App.css";
 
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-import 'firebase/compat/analytics';
+import { auth } from "../firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-firebase.initializeApp({
-    apiKey: "AIzaSyAOnYfYcGgrz5CBwlSj3NTW-Rzo6hQ85A8",
-    authDomain: "anime-match-a5f94.firebaseapp.com",
-    projectId: "anime-match-a5f94",
-    storageBucket: "anime-match-a5f94.appspot.com",
-    messagingSenderId: "561233950151",
-    appId: "1:561233950151:web:84b1c7e0e5684b410a95e2",
-    measurementId: "G-WMRL0G5JYF"
-})
-
-const auth = firebase.auth();
-const firestore = firebase.firestore();
-const useStyles = makeStyles({
-  header: {
-    display: "flex",
-    justifyContent: "space-between"
-  },
-  header_icon: {
-    padding: "20px",
-    fill: "orange",
-    fontSize: "large"
-  },
-  card: {
-    margin: "0 auto",
-    padding: "10px",
-
-    width: "200px",
-    height: "300px",
-
-    borderRadius: "10px",
-    backgroundColor: "#ad5389"
-  },
-  mainBackground: {
-    height: "97.3vh",
-    background: "linear-gradient(40deg, #6DD5FA 10%, #FFFFFF 90%)",
-
-    display: "flex",
-    justifyContent: "center",
-    alignContent: "center"
-  }
-});
+//const useStyles = makeStyles({
+//  header: {
+//    display: "flex",
+//    justifyContent: "space-between"
+//  },
+//  header_icon: {
+//    padding: "200px",
+//    fill: "orange",
+//    fontSize: "large"
+//  },
+//  card: {
+//    margin: "0 auto",
+//    padding: "10px",
+//
+//    width: "200px",
+//    height: "300px",
+//
+//    borderRadius: "10px",
+//    backgroundColor: "#ad5389"
+//  },
+//  mainBackground: {
+//    height: "97.3vh",
+//    
+//    background: "linear-gradient(90deg, rgba(48, 16, 255, 1) 0%,rgba(100, 115, 255, 1) 100%)", // OLD "linear-gradient(40deg, #6DD5FA 10%, #FFFFFF 90%)",
+//
+//    display: "flex",
+//    justifyContent: "center",
+//    alignContent: "center"
+//  }
+//});
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -68,7 +54,8 @@ function App() {
   }, [])
 
   const [user] = useAuthState(auth);
-  console.log(user)
+  
+  //console.log(user.email)
 
   useEffect(() => {
     async function sendMessage(e) {
@@ -77,7 +64,7 @@ function App() {
     }
   }, [user])
   
-  const classes = useStyles();
+  //const classes = useStyles();
 
   return (
     <>  
@@ -96,7 +83,7 @@ function App() {
               <Route path="/image" element={<Image />}>
               </Route>
 
-              <Route path="/history" element={<History />}>
+              <Route path="/history" element={user ? <History /> : <SignIn /> }>
               </Route>
 
             </Routes>

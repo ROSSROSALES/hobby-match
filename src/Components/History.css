@@ -1,0 +1,76 @@
+div {
+  margin: 0px;
+}
+
+.list{
+  margin: 20px;
+}
+
+.partlist{
+  width: 70%;
+  margin: auto;
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  border:2px solid;
+  border-style: outset;
+  border-width: 5px 10px;
+  border-color: rgba(128, 100, 100, 0.514);
+  border-radius: 5px;
+  padding: 10px;
+  overflow: auto;
+
+  font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+}
+
+.button {
+  float: right;
+  padding: 15px 25px ;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #aa0404;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #8e3e3e}
+
+.button:active {
+  background-color: #8e3e3e;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+
+ 
+ul {
+  list-style-type: none;
+  width: 500px;
+}
+ 
+h3 {
+  font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+}
+ 
+li img {
+  float: left;
+  margin: 0 15px 0 0;
+}
+ 
+li p {
+  font: 200 12px/1.5 Georgia, Times New Roman, serif;
+}
+ 
+li {
+  padding: 10px;
+  overflow: auto;
+}
+ 
+li:hover {
+  background: #eee;
+  cursor: pointer;
+}
