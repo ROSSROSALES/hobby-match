@@ -49,14 +49,14 @@ const provider = new GoogleAuthProvider(); // used to help log in authentication
 //    
 //}
 
-function getuserdata() {
-    const docRef = doc(firestore, 'user', 'rzcwz9Oc9LGBVGP4zFvr');
-    
-    getDoc(docRef)
-        .then((doc) => {
-            console.log("Doc Data \n", doc.data(), "This is the doc.id\n", doc.id)
-        })
-}
+//function getuserdata() {
+//    const docRef = doc(firestore, 'user', 'rzcwz9Oc9LGBVGP4zFvr');
+//    
+//    getDoc(docRef)
+//        .then((doc) => {
+//            console.log("Doc Data \n", doc.data(), "This is the doc.id\n", doc.id)
+//        })
+//}
 
 function signInWithGoogle() {
     signInWithPopup(auth, provider)
@@ -107,4 +107,4 @@ function SignOut() {
       auth.signOut()
 };
 
-export { signInWithGoogle, auth, firestore, SignOut, querySnapshot, getuserdata };
+export { signInWithGoogle, auth, firestore, SignOut, querySnapshot, /*getuserdata*/ };

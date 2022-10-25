@@ -1,8 +1,10 @@
 import 'firebase/compat/firestore';
 import { useEffect, useState } from 'react';
 import { firestore, querySnapshot, getuserdata } from "../firebase";
-import { doc, getDocs, getDoc, collection, onSnapshot } from "firebase/firestore";
+import { doc, getDocs, deleteDoc, getDoc, collection, onSnapshot } from "firebase/firestore";
 import './History.css';
+import { DiscFull } from '@material-ui/icons';
+
 
 // import a map from userdata, and return the list
 
@@ -14,48 +16,43 @@ function History() {
     // Search USER, return the titles of the animes into list 
     const [anime, setAnime] = useState([])
     const colRef = collection(firestore, "users")
+    //doc(collection(firestore, "users")).id
     useEffect(() => {
         getDocs(colRef)
             .then((snapshot) => {
                 let anime = []
                 snapshot.docs.forEach((doc) => {
-                    anime.push({ ...doc.data() })
+                    anime.push({ id: doc.id, ...doc.data()})
+                    // doc_data = {doc.data(), id:doc.id}
+                    //console.log("This is the doc data", doc.data())
+                    
                 })
-                console.log(anime)
                 setAnime(anime)
             //console.log("This is snapshot of collection data \n", snapshot.docs) // returns an array of objects
             });
         }, []);
 
+    function deleteCell(id) {
+        console.log("delete cell, ${id}")
+        // Updates the local list of anime to remove the item.id, and rerenders the react component to reflect changes
+        const newanime = anime.filter((item) => item.id !== id);
+        setAnime(newanime);
 
-    //let documents = [{id:1, touch:"90000"}, {touch:"80000"}, {touch:"70000"}] // create new array to hold the data properties
-    //let animetitles1 = []
-    //getDocs(querySnapshot)
-    //.then((snapshot) => {
-    //console.log("This is snapshot of collection data \n", snapshot.docs) // returns an array of objects
-    //snapshot.docs.forEach((doc) => {
-    //    console.log("data is being pushed", doc)
-    //    documents.push({ ...doc.data(), id: doc.id }) // create a new object to store into documents array
-    //    //setuserData({ ...doc.data(), id: doc.id })
-    //    if (doc.data().animetitle) {
-    //        animetitles.push({ ...doc.data().animetitle, id: doc.id })
-    //    }
-    //})
-    //})
-    //.catch(err => {
-    //    console.log(err.message)
-    //})
+        // calls upon firestore and deletes from database
+        deleteDoc(doc(firestore, "users", id));
+        
+    };
+    
 
 
     return (
         <div className="list">
-            Hello
             {anime.length > 0 ? (
                 anime.map((doc) => 
                 <div className="partlist" key={doc.id}>
                     {doc.animeTitle} 
                     <div class="cont">  
-                        <button class="button">
+                        <button class="button" onClick={() => deleteCell(doc.id)}>
                             <span>Delete</span>
                             <img src="https://i.cloudup.com/2ZAX3hVsBE-3000x3000.png" height="62" width="62"/>
                         </button>

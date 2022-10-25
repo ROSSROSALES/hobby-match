@@ -7,8 +7,7 @@ import { auth, firestore } from "../firebase";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/analytics';
-import { collection, doc, setDoc, Timestamp, addDoc } from "firebase/firestore"; 
-
+import { collection, getDocs, doc, setDoc, Timestamp, addDoc } from "firebase/firestore"; 
 
 const useStyles = makeStyles({
   card: {
@@ -53,13 +52,21 @@ const useStyles = makeStyles({
   }
 });
 
+// if title in history/database, remove from the available list
+
 const anime_array = []
 function response() {
  fetch("https://api.jikan.moe/v4/top/anime")
  .then(response => response.json())
  .then(function(result) {
    for (var i=0; i<result.data.length; i++) {
-     anime_array.push(result.data[i])
+    console.log(result.data[i].title);
+    anime_array.push(result.data[i])
+    //getDocs(collection(firestore, 'users')).docs.forEach((doc) => {console.log(doc))
+    //if ( !collection(firestore, 'users').animeTitle[result.data[i].title] ) {/* title not in history/databse, then we can add it, otherwise keep it out */
+    // 
+    // console.log(anime_array)
+    //}
    }
    console.log("this is the curr user", auth.currentUser)
    const { uid, photoURL } = auth.currentUser;
@@ -70,9 +77,6 @@ function response() {
  .catch(error => console.error(error));
  };
 response()
-
-//const userRef = firestore('user')
-//console.log(userRef)
 
 // make sure to update the rules on firebase from false to true, based on timeframe to open
 // Need to find a way to add to firebase
