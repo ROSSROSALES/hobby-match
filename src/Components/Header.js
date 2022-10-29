@@ -23,23 +23,28 @@ const pages = [
         path: '/'
     },
     {
-        title: 'Chat', 
-        path: '/chat'
-    },
-]
-
-const settings = [
-    {
         title: 'Profile', 
         path: '/history'
     },
     {
-        title: 'Account', 
-        path: '/'
+      title: 'Chat', 
+      path: '/chat'
+  },
+]
+
+const settings = [
+    {
+      title: 'Home', 
+      path: '/'
     },
     {
-        title: 'Dashboard', 
-        path: '/'
+      title: 'Profile', 
+      path: '/history'
+    },
+    
+    {
+      title: 'Chat', 
+      path: '/chat'
     },
 ];
 
@@ -160,7 +165,7 @@ function Header(props) {
                 <Button
                     key={page.title}
                     onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
+                    sx={{ my: 2, color: 'white', display: 'block',  marginLeft: 2}} // ToDo: Title currently changes format too
                 >
                     {page.title}
                 </Button>
