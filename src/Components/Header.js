@@ -165,7 +165,7 @@ function Header(props) {
                 <Button
                     key={page.title}
                     onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: 'white', display: 'block', textDecoration: 'none'}}
+                    sx={{ my: 2, color: 'white', display: 'block',  marginLeft: 2}} // ToDo: Title currently changes format too
                 >
                     {page.title}
                 </Button>
