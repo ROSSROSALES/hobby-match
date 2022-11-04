@@ -1,6 +1,6 @@
 # Link
 
-[Hooby-Match](https://anime-match-a5f94.web.app/)
+[Hobby-Match](https://anime-match-a5f94.web.app/)
 
 
 # Getting Started with Create React App
