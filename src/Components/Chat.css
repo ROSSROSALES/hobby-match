@@ -60,7 +60,7 @@ body {
     bottom: 0;
     background-color: rgb(24, 23, 23);
     width: 100%;
-    max-width: 728px;
+    max-width: auto;
     display: flex;
     font-size: 1.5rem;
   }
