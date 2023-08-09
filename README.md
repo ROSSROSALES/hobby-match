@@ -2,7 +2,14 @@
 
 [Hobby-Match](https://anime-match-a5f94.web.app/)
 
+# Update (newest first)
+
+- Added Profile Pic to Chat
+
+![Hobby-Match Chat Profile Pic update](https://github.com/ROSSROSALES/hobby-match/assets/52366381/f103dd32-b1d4-4a7c-815a-ccc316b8dd52)
+
 # Demo
+
 
 - Home
 
