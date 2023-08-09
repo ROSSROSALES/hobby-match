@@ -7,7 +7,6 @@ import LoadingScreen from "./Loading";
 import History from "./History";
 import { SignIn } from "./SignIn";
 
-import { makeStyles } from "@material-ui/styles";
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import "./App.css";
@@ -47,31 +46,30 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 //});
 
 function App() {
+  // add lock to check for api response before showing data
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 6000)
+    setTimeout(() => setLoading(false), 1600)
   }, [])
 
   const [user] = useAuthState(auth);
   
-  //console.log(user.email)
 
-  useEffect(() => {
-    async function sendMessage(e) {
-      e.preventDefault();
-      const { photoURL } = auth.currentUser;
-    }
-  }, [user])
+  //useEffect(() => {
+  //  async function sendMessage(e) {
+  //    e.preventDefault();
+  //    const { photoURL } = auth.currentUser;
+  //  }
+  //}, [user])
   
-  //const classes = useStyles();
 
   return (
     <>  
     {loading === false ? (
         <Router>
 
-          <Header auth = { auth } /*photoURL= { photoURL }*//> 
+          <Header auth = { auth } /> 
             <Routes>
               
               <Route path="/chat" element={user ? <Chat /> : <SignIn />}>

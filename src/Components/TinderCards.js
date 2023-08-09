@@ -56,7 +56,7 @@ const useStyles = makeStyles({
 
 const anime_array = []
 function response() {
- fetch("https://api.jikan.moe/v4/top/anime")
+ fetch("https://api.jikan.moe/v4/top/anime?page=2&limit=25")
  .then(response => response.json())
  .then(function(result) {
    for (var i=0; i<result.data.length; i++) {
@@ -68,10 +68,10 @@ function response() {
     // console.log(anime_array)
     //}
    }
-   console.log("this is the curr user", auth.currentUser)
-   const { uid, photoURL } = auth.currentUser;
-   console.log("This is uid", uid)
-   console.log("this is profileURL", photoURL)
+   //console.log("this is the curr user", auth.currentUser)
+   //const { uid, photoURL } = auth.currentUser;
+   //console.log("This is uid", uid)
+   //console.log("this is profileURL", photoURL)
    //console.log(firestore)
  })
  .catch(error => console.error(error));

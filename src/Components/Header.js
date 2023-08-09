@@ -14,6 +14,8 @@ import MenuItem from '@mui/material/MenuItem';
 import BlenderIcon from '@mui/icons-material/Blender';
 import { Link } from "react-router-dom";
 
+import { auth } from "../firebase";
+
 import { SignOut } from "../firebase";
 
 
@@ -51,14 +53,15 @@ const settings = [
 
 function Header(props) {
 
-
-  const {photoURL} = props;
+  const { photoURL } = auth.currentUser;
+  //const {photoURL} = props;
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   function handleOpenNavMenu(event) {
     console.log(event.currentTarget)
+    console.log("This opens the menu")
     setAnchorElNav(event.currentTarget);
   };
 
@@ -133,7 +136,7 @@ function Header(props) {
             >
               {pages.map((page) => (
                 <Link to={page.path}>
-                    <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                    <MenuItem key={page.title} onClick={() => {handleCloseNavMenu(); handleLinkClick();}}>
                     <Typography textAlign="center" color="black" >{page.title}</Typography>
                     </MenuItem>
                 </Link>
