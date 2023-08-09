@@ -2,7 +2,7 @@
 
 [Hobby-Match](https://anime-match-a5f94.web.app/)
 
-# Update
+# Update (newest first)
 
 - Added Profile Pic to Chat
 
