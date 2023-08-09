@@ -36,6 +36,8 @@ function ChatRoom() {
   console.log("This is QUERY:", query1)
   const [formValue, setFormValue] = useState('');
 
+  const { uid, photoURL } = auth.currentUser;
+
   const sendMessage = async (e) => {
     e.preventDefault();
 
@@ -45,8 +47,8 @@ function ChatRoom() {
     await addDoc(messagesRef, {
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      //uid,
-      //photoURL
+      uid: uid,
+      photoURL: photoURL
     })
     setFormValue('');
     dummy.current.scrollIntoView({ behavior: 'smooth' });
@@ -77,7 +79,7 @@ function ChatMessage(props) {
 
   return (<>
     <div className={`message ${messageClass}`}>
-      <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
+      <img src={photoURL || 'https://pic.onlinewebfonts.com/thumbnails/icons_193221.svg'} />
       <p>{text}</p>
     </div>
   </>)

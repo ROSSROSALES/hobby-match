@@ -12,8 +12,10 @@ function History() {
     // need to figure out exactly what firebase is returning,
     // clear out the data we have next time we have access
     // we want to be able to pull specifically the data into JSON so its easier to read
-    //console.log("fire is JSON", firestore.toJSON())
+    // console.log("fire is JSON", firestore.toJSON())
+
     // Search USER, return the titles of the animes into list 
+    
     const [anime, setAnime] = useState([])
     const colRef = collection(firestore, "users")
     //doc(collection(firestore, "users")).id
