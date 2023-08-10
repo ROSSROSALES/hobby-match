@@ -4,6 +4,7 @@ import { firestore, querySnapshot, getuserdata } from "../firebase";
 import { doc, getDocs, deleteDoc, getDoc, collection, onSnapshot } from "firebase/firestore";
 import './History.css';
 import { DiscFull } from '@material-ui/icons';
+import Popup from 'reactjs-popup';
 
 
 // import a map from userdata, and return the list
@@ -17,6 +18,7 @@ function History() {
     // Search USER, return the titles of the animes into list 
     
     const [anime, setAnime] = useState([])
+    const [popupIsOpen, setPopupIsOpen] = useState(false);
     const colRef = collection(firestore, "users")
     //doc(collection(firestore, "users")).id
     useEffect(() => {
@@ -42,12 +44,45 @@ function History() {
 
         // calls upon firestore and deletes from database
         deleteDoc(doc(firestore, "users", id));
-        
+    }
+
+    function deleteAllCells() {
+        setAnime([]);
+        anime.forEach(anime.map((item) => deleteDoc(doc(firestore, "users", item.id))));
     };
     
-
-
     return (
+        <>
+        <div>
+        <Popup trigger=
+            {<button class="button">  Delete All </button>}
+            modal nested>
+            {
+                close => (
+                    <div className="popup-container">
+                        <div className='DeleteAllText'>
+                            Are you sure you want to delete all?
+                        </div>
+                        <div >
+                            <button className="button-popup" onClick=
+                                {() => {close(); deleteAllCells();}}>
+                                    Yes
+                            </button>
+                        </div>
+                    </div>
+                )
+            }
+        </Popup>
+        {/* <Popup trigger={
+            <button class="button" onClick={() => deleteAllCells()}>
+                            <span>Delete All</span>
+                            <img src="https://i.cloudup.com/2ZAX3hVsBE-3000x3000.png" height="62" width="62"/>
+                        </button>} position ="left center">
+                        <div>Popup content here !!</div>
+        </Popup> */}
+        </div>
+        
+        
         <div className="list">
             {anime.length > 0 ? (
                 anime.map((doc) => 
@@ -67,6 +102,8 @@ function History() {
             
             
         </div>
+        </>
+        
     );
 };
 
