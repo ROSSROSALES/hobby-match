@@ -27,10 +27,11 @@ function History() {
                 let anime = []
                 snapshot.docs.forEach((doc) => {
                     anime.push({ id: doc.id, ...doc.data()})
-                    // doc_data = {doc.data(), id:doc.id}
                     //console.log("This is the doc data", doc.data())
-                    
+                    //console.log(doc.data()["animeTitle"])  
                 })
+                // goes through each item in the array, and finds the "like" items. Filtering anime array
+                anime = anime.filter((item) => item["like"] == true);
                 setAnime(anime)
             //console.log("This is snapshot of collection data \n", snapshot.docs) // returns an array of objects
             });
