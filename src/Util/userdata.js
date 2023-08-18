@@ -9,25 +9,6 @@ const querySnapshot = collection(firestore, "user")
 
 
 function getcollectiondata() {
-  //const [userdata, setuserData] = useState([])
-  //getDocs(querySnapshot)
-  //    .then((snapshot) => {
-  //    console.log("This is snapshot of collection data \n", snapshot.docs) // returns an array of objects
-  //    let documents = [] // create new array to hold the data properties
-  //    let animetitles = []
-  //    snapshot.docs.forEach((doc) => {
-  //        documents.push({ ...doc.data(), id: doc.id }) // create a new object to store into documents array
-  //        setuserData({ ...doc.data(), id: doc.id })
-  //        if (doc.data().animetitle) {
-  //            animetitles.push({ ...doc.data().animetitle, id: doc.id })
-  //        }
-  //    })
-  //    console.log(documents)
-  //    console.log(animetitles)
-  //})
-  //.catch(err => {
-  //    console.log(err.message)
-  //})
   
 }
 

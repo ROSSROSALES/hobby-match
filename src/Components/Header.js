@@ -54,14 +54,12 @@ const settings = [
 function Header(props) {
 
   const { photoURL } = auth.currentUser;
-  //const {photoURL} = props;
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   function handleOpenNavMenu(event) {
     console.log(event.currentTarget)
-    console.log("This opens the menu")
     setAnchorElNav(event.currentTarget);
   };
 

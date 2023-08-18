@@ -43,7 +43,6 @@ const useStyles = makeStyles({
     color: "black"
   },
   text: {
-    // position: "absolute",
     font: "Verdana, sans-serif",
     margin: 5,
     variant: "p3",
@@ -51,8 +50,6 @@ const useStyles = makeStyles({
     position: "right",
   }
 });
-
-// if title in history/database, remove from the available list
 
 const anime_array = []
 function response() {
@@ -62,24 +59,13 @@ function response() {
    for (var i=0; i<result.data.length; i++) {
     console.log(result.data[i].title);
     anime_array.push(result.data[i])
-    //getDocs(collection(firestore, 'users')).docs.forEach((doc) => {console.log(doc))
-    //if ( !collection(firestore, 'users').animeTitle[result.data[i].title] ) {/* title not in history/databse, then we can add it, otherwise keep it out */
-    // 
-    // console.log(anime_array)
-    //}
    }
-   //console.log("this is the curr user", auth.currentUser)
-   //const { uid, photoURL } = auth.currentUser;
-   //console.log("This is uid", uid)
-   //console.log("this is profileURL", photoURL)
-   //console.log(firestore)
  })
  .catch(error => console.error(error));
  };
 response()
 
 // make sure to update the rules on firebase from false to true, based on timeframe to open
-// Need to find a way to add to firebase
 async function onSwipe(direction, anime) {
   if (direction == 'left') {
     direction = false
@@ -87,21 +73,15 @@ async function onSwipe(direction, anime) {
     direction = true
   }
   const { uid, photoURL } = auth.currentUser;
-  console.log("anime title", anime)
-  console.log("anime title", direction)
-  console.log("uid", uid)
-  console.log("PhotoURL", photoURL)
+
 // new way to add document to firestore database
   await addDoc(collection(firestore, 'users'), { // Always needs even number of 'user', 'user' arguments, what you are extracting from firestore db
-      //text: direction,
-      //date: Timestamp,
       animeTitle: anime,
       like: direction,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       user: uid,
       photo: photoURL
   });
-  console.log("liked: " + direction);
 };
 
 function TinderCards() {
