@@ -64,7 +64,7 @@ function response() {
  .catch(error => console.error(error));
  };
 response()
-
+//
 // make sure to update the rules on firebase from false to true, based on timeframe to open
 async function onSwipe(direction, anime) {
   if (direction == 'left') {
