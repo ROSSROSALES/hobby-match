@@ -61,6 +61,9 @@ function response() {
  .then(function(result) {
    for (var i=0; i<result.data.length; i++) {
     console.log(result.data[i].title);
+
+    // add logic here to filter out what anime has been shown already based on the history
+    
     anime_array.push(result.data[i])
     //getDocs(collection(firestore, 'users')).docs.forEach((doc) => {console.log(doc))
     //if ( !collection(firestore, 'users').animeTitle[result.data[i].title] ) {/* title not in history/databse, then we can add it, otherwise keep it out */
