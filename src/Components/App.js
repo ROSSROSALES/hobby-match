@@ -14,37 +14,6 @@ import "./App.css";
 import { auth } from "../firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-//const useStyles = makeStyles({
-//  header: {
-//    display: "flex",
-//    justifyContent: "space-between"
-//  },
-//  header_icon: {
-//    padding: "200px",
-//    fill: "orange",
-//    fontSize: "large"
-//  },
-//  card: {
-//    margin: "0 auto",
-//    padding: "10px",
-//
-//    width: "200px",
-//    height: "300px",
-//
-//    borderRadius: "10px",
-//    backgroundColor: "#ad5389"
-//  },
-//  mainBackground: {
-//    height: "97.3vh",
-//    
-//    background: "linear-gradient(90deg, rgba(48, 16, 255, 1) 0%,rgba(100, 115, 255, 1) 100%)", // OLD "linear-gradient(40deg, #6DD5FA 10%, #FFFFFF 90%)",
-//
-//    display: "flex",
-//    justifyContent: "center",
-//    alignContent: "center"
-//  }
-//});
-
 function App() {
   // add lock to check for api response before showing data
   const [loading, setLoading] = useState(true)
@@ -55,15 +24,6 @@ function App() {
 
   const [user] = useAuthState(auth);
   
-
-  //useEffect(() => {
-  //  async function sendMessage(e) {
-  //    e.preventDefault();
-  //    const { photoURL } = auth.currentUser;
-  //  }
-  //}, [user])
-  
-
   return (
     <>  
     {loading === false ? (
