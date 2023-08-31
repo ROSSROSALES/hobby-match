@@ -7,7 +7,8 @@ import { auth, firestore } from "../firebase";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/analytics';
-import { collection, getDocs, doc, setDoc, Timestamp, addDoc } from "firebase/firestore"; 
+import { getDoc, where, query, collection, getDocs, doc, setDoc, Timestamp, addDoc } from "firebase/firestore"; 
+import { getTopAnime } from "../Api/animeapi";
 
 const useStyles = makeStyles({
   card: {
@@ -52,34 +53,56 @@ const useStyles = makeStyles({
   }
 });
 
-// if title in history/database, remove from the available list
-
-const anime_array = []
-function response() {
- fetch("https://api.jikan.moe/v4/top/anime?page=2&limit=25")
- .then(response => response.json())
- .then(function(result) {
-   for (var i=0; i<result.data.length; i++) {
-    console.log(result.data[i].title);
-
-    // add logic here to filter out what anime has been shown already based on the history
+const anime_map = []
+async function getAllAnimeTitleFromDb() {
+  try {
+    //const usersCollectionRef = collection(firestore, 'users');
     
-    anime_array.push(result.data[i])
-    //getDocs(collection(firestore, 'users')).docs.forEach((doc) => {console.log(doc))
-    //if ( !collection(firestore, 'users').animeTitle[result.data[i].title] ) {/* title not in history/databse, then we can add it, otherwise keep it out */
-    // 
-    // console.log(anime_array)
-    //}
-   }
-   //console.log("this is the curr user", auth.currentUser)
-   //const { uid, photoURL } = auth.currentUser;
-   //console.log("This is uid", uid)
-   //console.log("this is profileURL", photoURL)
-   //console.log(firestore)
- })
- .catch(error => console.error(error));
- };
-response()
+    // Create a query to get documents where the age field is greater than the threshold
+    //const q = query(usersCollectionRef, where('animeTitle'));
+    
+    // old const querySnapshot = await getDocs(q);
+
+    const querySnapshot = await getDocs(collection(firestore, 'users'))
+    querySnapshot.forEach(doc => {
+      console.log(doc.data().animeTitle)
+      anime_map.push(doc.data().animeTitle.toString())
+    });
+
+  } catch (error) {
+    console.error('Error getting users:', error);
+    return [];
+  }
+}
+
+// if title in history/database, remove from the available list
+const anime_array = []
+const anime_titles = []
+getTopAnime()
+  .then(responseData => {
+    for (var i=0; i<responseData.data.length; i++) {
+        anime_array.push(responseData.data[i])
+        anime_titles.push(responseData.data[i].title)
+      }
+  })
+
+ getAllAnimeTitleFromDb()
+
+ console.log(anime_titles)
+ console.log(anime_map)
+ console.log(anime_array)
+
+ anime_titles += anime_map
+ console.log(anime_titles)
+ function removeDuplicates(array1, array2) {
+  const combinedArray = array1.concat(array2);
+  const uniqueArray = Array.from(new Set(combinedArray));
+  console.log(combinedArray)
+  return uniqueArray;
+}
+
+const result1 = removeDuplicates(anime_titles, anime_map);
+console.log(result1)
 
 // make sure to update the rules on firebase from false to true, based on timeframe to open
 // Need to find a way to add to firebase
@@ -107,7 +130,9 @@ async function onSwipe(direction, anime) {
   console.log("liked: " + direction);
 };
 
+
 function TinderCards() {
+
   const classes = useStyles();
   return (
     <div className={classes.container}>
@@ -127,7 +152,7 @@ function TinderCards() {
             >
             </div>
             <Typography className={classes.title} variant="h5">
-                {/*anime.title*/}
+                {anime.title}
               </Typography>
             <Typography className={classes.text}> {/*anime.score*/} </Typography>
           </div>
