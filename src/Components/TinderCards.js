@@ -52,12 +52,10 @@ const useStyles = makeStyles({
     position: "right",
   }
 });
-
+const anime_set = new Set()
 const anime_map = []
 async function getAllAnimeTitleFromDb() {
   try {
-    //const usersCollectionRef = collection(firestore, 'users');
-    
     // Create a query to get documents where the age field is greater than the threshold
     //const q = query(usersCollectionRef, where('animeTitle'));
     
@@ -67,6 +65,8 @@ async function getAllAnimeTitleFromDb() {
     querySnapshot.forEach(doc => {
       console.log(doc.data().animeTitle)
       anime_map.push(doc.data().animeTitle.toString())
+
+      anime_set.add(doc.data().animeTitle.toString())
     });
 
   } catch (error) {
@@ -82,28 +82,15 @@ getTopAnime()
   .then(responseData => {
     for (var i=0; i<responseData.data.length; i++) {
         anime_array.push(responseData.data[i])
-        anime_titles.push(responseData.data[i].title)
+        anime_map.push(responseData.data[i].title)
+
+        anime_set.add(responseData.data[i].title)
       }
   })
 
  getAllAnimeTitleFromDb()
-
- console.log(anime_titles)
- console.log(anime_map)
- console.log(anime_array)
-
- anime_titles += anime_map
- console.log(anime_titles)
- function removeDuplicates(array1, array2) {
-  const combinedArray = array1.concat(array2);
-  const uniqueArray = Array.from(new Set(combinedArray));
-  console.log(combinedArray)
-  return uniqueArray;
-}
-
-const result1 = removeDuplicates(anime_titles, anime_map);
-console.log(result1)
-
+const myArray = Array.from(anime_set)
+console.log(myArray)
 // make sure to update the rules on firebase from false to true, based on timeframe to open
 // Need to find a way to add to firebase
 async function onSwipe(direction, anime) {
