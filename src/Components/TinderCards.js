@@ -59,7 +59,6 @@ async function getAllAnimeTitleFromDb() {
     // Create a query to get documents where the age field is greater than the threshold
     //const q = query(usersCollectionRef, where('animeTitle'));
     
-    // old const querySnapshot = await getDocs(q);
 
     const querySnapshot = await getDocs(collection(firestore, 'users'))
     querySnapshot.forEach(doc => {
