@@ -1,13 +1,12 @@
 
-import TinderCards from "./TinderCards.js";
+import Cards from "./Cards.js";
 import Chat from "./Chat.js";
-import Image from "./Image.js";
 import Header from "./Header";
 import LoadingScreen from "./Loading";
 import History from "./History";
 import { SignIn } from "./SignIn";
 
-import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import "./App.css";
 
@@ -22,24 +21,25 @@ function App() {
     setTimeout(() => setLoading(false), 1600)
   }, [])
 
-  const [user] = useAuthState(auth);
+  const user = useAuthState(auth);
   
   return (
     <>  
     {loading === false ? (
         <Router>
-
-          <Header auth = { auth } /> 
+          <Header auth={auth}/>
             <Routes>
-              
+              <Route exact path="/sign-in" element={user ? <Navigate to="/" /> : <SignIn />}>
+              </Route>
+
+              <Route exact path="/" element={user ? <Cards /> : <Navigate to="/sign-in"/> }>
+              </Route>
+
               <Route path="/chat" element={user ? <Chat /> : <SignIn />}>
               </Route>
 
-              <Route path="/" element={user ? <TinderCards /> : <SignIn />}>
-              </Route>
-
-              <Route path="/image" element={<Image />}>
-              </Route>
+              {/* <Route path="/" element={user ? <Cards /> : <SignIn />}>
+              </Route> */}
 
               <Route path="/history" element={user ? <History /> : <SignIn /> }>
               </Route>

@@ -51,9 +51,9 @@ const settings = [
 ];
 
 
-function Header(props) {
+function Header() {
 
-  const { photoURL } = auth.currentUser;
+  // const { photoURL } = auth.currentUser;
   //const {photoURL} = props;
 
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -179,7 +179,7 @@ function Header(props) {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src= {photoURL}/>
+                <Avatar alt="Remy Sharp" src= "public\logo192.png"/>
               </IconButton>
             </Tooltip>
             <Menu

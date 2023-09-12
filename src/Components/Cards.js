@@ -117,7 +117,7 @@ async function onSwipe(direction, anime) {
 };
 
 
-function TinderCards() {
+function Cards() {
 
   const classes = useStyles();
   return (
@@ -138,7 +138,7 @@ function TinderCards() {
             >
             </div>
             <Typography className={classes.title} variant="h5">
-                {anime.title}
+                {/* {anime.title} */}
               </Typography>
             <Typography className={classes.text}> {/*anime.score*/} </Typography>
           </div>
@@ -148,4 +148,4 @@ function TinderCards() {
   );
 };
 
-export default TinderCards;
+export default Cards;

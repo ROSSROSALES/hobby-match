@@ -21,7 +21,6 @@ const app = initializeApp(firebaseConfig); // initializes connection to firebase
 const auth = getAuth(app); //get which user is authenticated
 const firestore = getFirestore(app); // returns firestore instance, Database Instance
 const querySnapshot = collection(firestore, "user") // grabs snapshot of collection, after updating from 'firebase/firestore/lite' to 'firebase/firestore'
-//console.log('This is the read of the collection of data', querySnapshot)
 
 const colRef = collection(firestore, "users")
 
@@ -65,8 +64,6 @@ function signInWithGoogle() {
             const email = result.user.email;
             const profilePic = result.user.photoURL;
 
-            console.log(name, email, profilePic)
-
             localStorage.setItem("name", name);
             localStorage.setItem("email", email);
             localStorage.setItem("profilePic", profilePic);
@@ -76,35 +73,8 @@ function signInWithGoogle() {
         });
 }
 
-//signInWithPopup(auth, provider)
-//  .then((result) => {
-//    // This gives you a Google Access Token. You can use it to access the Google API.
-//    const credential = GoogleAuthProvider.credentialFromResult(result);
-//    const token = credential.accessToken;
-//    // The signed-in user info.
-//    const user = result.user;
-//    // ...
-//  }).catch((error) => {
-//    // Handle Errors here.
-//    const errorCode = error.code;
-//    const errorMessage = error.message;
-//    // The email of the user's account used.
-//    const email = error.customData.email;
-//    // The AuthCredential type that was used.
-//    const credential = GoogleAuthProvider.credentialFromError(error);
-//    // ...
-//  });
-
-
-
-//function signInWithGoogle() {
-//    const provider = new firebase.auth.GoogleAuthProvider();
-//    auth.signInWithPopup(provider);
-//    
-//};
-
 function SignOut() {
       auth.signOut()
 };
 
-export { signInWithGoogle, auth, firestore, SignOut, querySnapshot, /*getuserdata*/ };
+export { signInWithGoogle, auth, firestore, SignOut, querySnapshot };
