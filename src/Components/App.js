@@ -21,13 +21,16 @@ function App() {
     setTimeout(() => setLoading(false), 1600)
   }, [])
 
-  const user = useAuthState(auth);
+  const user = auth.currentUser;
+  
+  console.log('This is the user', user)
+
   
   return (
     <>  
     {loading === false ? (
         <Router>
-          <Header auth={auth}/>
+          <Header/>
             <Routes>
               <Route exact path="/sign-in" element={user ? <Navigate to="/" /> : <SignIn />}>
               </Route>
@@ -37,9 +40,6 @@ function App() {
 
               <Route path="/chat" element={user ? <Chat /> : <SignIn />}>
               </Route>
-
-              {/* <Route path="/" element={user ? <Cards /> : <SignIn />}>
-              </Route> */}
 
               <Route path="/history" element={user ? <History /> : <SignIn /> }>
               </Route>

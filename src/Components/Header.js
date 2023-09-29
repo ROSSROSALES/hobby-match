@@ -52,9 +52,17 @@ const settings = [
 
 
 function Header() {
+  const user = auth.currentUser;
+  console.log(user)
 
-  // const { photoURL } = auth.currentUser;
-  //const {photoURL} = props;
+  //if (user) {
+  //  // User is authenticated, you can safely access user properties like photoURL
+  //  const { photoURL } = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fillustrations%2Fempty-profile-picture&psig=AOvVaw2yD1HDk6aK7kYmnGv1TtDg&ust=1696114999524000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCLjQ7vH20IEDFQAAAAAdAAAAABAZ";
+  //  console.log('User photoURL:', photoURL);
+  //} else {
+  //  // User is not authenticated, handle accordingly
+  //  console.log('User is not authenticated');
+  //}
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -179,7 +187,7 @@ function Header() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src= "public\logo192.png"/>
+                <Avatar alt="Remy Sharp" src= {user ? user.photoURL : "https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0="}/>
               </IconButton>
             </Tooltip>
             <Menu

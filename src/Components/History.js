@@ -5,6 +5,8 @@ import { doc, getDocs, deleteDoc, getDoc, collection, onSnapshot } from "firebas
 import './History.css';
 import { DiscFull } from '@material-ui/icons';
 import Popup from 'reactjs-popup';
+import Header from "./Header";
+import { auth } from "../firebase";
 
 
 // import a map from userdata, and return the list
@@ -38,7 +40,7 @@ function History() {
         }, []);
 
     function deleteCell(id) {
-        console.log("delete cell, ${id}")
+        //console.log("delete cell, ${id}")
         // Updates the local list of anime to remove the item.id, and rerenders the react component to reflect changes
         const newanime = anime.filter((item) => item.id !== id);
         setAnime(newanime);
@@ -54,7 +56,9 @@ function History() {
     
     return (
         <>
+        {/* <Header auth={auth}/> */}
         <div>
+        {/* <Header auth={auth}/> */}
         <Popup trigger=
             {<button class="button">  Delete All </button>}
             modal nested>
