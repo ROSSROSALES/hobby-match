@@ -3,11 +3,8 @@ import { useEffect, useState } from 'react';
 import { firestore, querySnapshot, getuserdata } from "../firebase";
 import { doc, getDocs, deleteDoc, getDoc, collection, onSnapshot } from "firebase/firestore";
 import './History.css';
-import { DiscFull } from '@material-ui/icons';
 import Popup from 'reactjs-popup';
-import Header from "./Header";
 import { auth } from "../firebase";
-
 
 // import a map from userdata, and return the list
 
@@ -56,9 +53,7 @@ function History() {
     
     return (
         <>
-        {/* <Header auth={auth}/> */}
         <div>
-        {/* <Header auth={auth}/> */}
         <Popup trigger=
             {<button class="button">  Delete All </button>}
             modal nested>
@@ -113,21 +108,3 @@ function History() {
 };
 
 export default History;
-
-/* 
-{userdata.length > 0 ? (
-                userdata.map((doc) => 
-                <div className="partlist" key={doc.id}>
-                    {doc.title} 
-                    <div class="cont">  
-                        <button class="button">
-                            <span>Delete</span>
-                            <img src="https://i.cloudup.com/2ZAX3hVsBE-3000x3000.png" height="62" width="62"/>
-                        </button>
-                    </div>
-                </div>)
-                ) : (
-                    <h1> no data yet </h1>
-                )
-            }
-            */
