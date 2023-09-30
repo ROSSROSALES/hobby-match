@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/styles";
 import { Typography } from "@material-ui/core";
-import TinderCard from "react-tinder-card";
+import { makeStyles } from "@material-ui/styles";
+import 'firebase/compat/analytics';
 import firebase from 'firebase/compat/app';
-import { auth, firestore } from "../firebase";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import 'firebase/compat/analytics';
-import { getDoc, where, query, collection, getDocs, doc, setDoc, Timestamp, addDoc } from "firebase/firestore"; 
+import { addDoc, collection, getDocs } from "firebase/firestore";
+import React from "react";
+import TinderCard from "react-tinder-card";
 import { getTopAnime } from "../Api/animeapi";
+import { auth, firestore } from "../firebase";
 
 const useStyles = makeStyles({
   card: {
@@ -56,10 +56,6 @@ const anime_set = new Set()
 const anime_map = []
 async function getAllAnimeTitleFromDb() {
   try {
-    // Create a query to get documents where the age field is greater than the threshold
-    //const q = query(usersCollectionRef, where('animeTitle'));
-    
-
     const querySnapshot = await getDocs(collection(firestore, 'users'))
     querySnapshot.forEach(doc => {
       console.log(doc.data().animeTitle)
@@ -76,7 +72,6 @@ async function getAllAnimeTitleFromDb() {
 
 // if title in history/database, remove from the available list
 const anime_array = []
-const anime_titles = []
 getTopAnime()
   .then(responseData => {
     for (var i=0; i<responseData.data.length; i++) {
@@ -89,9 +84,6 @@ getTopAnime()
 
  getAllAnimeTitleFromDb()
 const myArray = Array.from(anime_set)
-console.log(myArray)
-// make sure to update the rules on firebase from false to true, based on timeframe to open
-// Need to find a way to add to firebase
 async function onSwipe(direction, anime) {
   if (direction == 'left') {
     direction = false
@@ -99,14 +91,9 @@ async function onSwipe(direction, anime) {
     direction = true
   }
   const { uid, photoURL } = auth.currentUser;
-  console.log("anime title", anime)
-  console.log("anime title", direction)
-  console.log("uid", uid)
-  console.log("PhotoURL", photoURL)
-// new way to add document to firestore database
-  await addDoc(collection(firestore, 'users'), { // Always needs even number of 'user', 'user' arguments, what you are extracting from firestore db
-      //text: direction,
-      //date: Timestamp,
+
+  await addDoc(collection(firestore, 'users'), {
+
       animeTitle: anime,
       like: direction,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),

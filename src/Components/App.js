@@ -2,27 +2,22 @@
 import Cards from "./Cards.js";
 import Chat from "./Chat.js";
 import Header from "./Header";
-import LoadingScreen from "./Loading";
 import History from "./History";
+import LoadingScreen from "./Loading";
 import { SignIn } from "./SignIn";
 
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import React, { useState, useEffect } from 'react';
-import "./App.css";
-import { onAuthStateChanged } from "firebase/auth";
-
+import React, { useEffect, useState } from 'react';
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { auth } from "../firebase";
-import { useAuthState } from 'react-firebase-hooks/auth';
+import "./App.css";
 
 function App() {
-  // add lock to check for api response before showing data
   const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1600)
   }, [])
-
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {

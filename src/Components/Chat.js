@@ -1,11 +1,10 @@
-import React, { useRef, useState } from 'react';
-import './Chat.css';
 import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore'
+import 'firebase/compat/firestore';
+import { addDoc, collection, getDocs, limit, orderBy, query } from "firebase/firestore";
+import React, { useRef, useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { auth, firestore } from "../firebase";
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { collection, orderBy, query, limit, addDoc, getDocs } from "firebase/firestore"; 
+import './Chat.css';
 
 function Chat() {
   return (

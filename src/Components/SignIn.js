@@ -1,6 +1,6 @@
 import React from 'react';
 import { signInWithGoogle } from "../firebase";
-import "./SignIn.css"
+import "./SignIn.css";
 
 function SignIn() {
 
@@ -13,3 +13,4 @@ function SignIn() {
   };
 
 export { SignIn };
+

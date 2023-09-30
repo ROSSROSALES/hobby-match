@@ -1,20 +1,18 @@
-import firebase from 'firebase/compat/app';
+import { initializeApp } from 'firebase/app';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import 'firebase/compat/analytics';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import 'firebase/compat/analytics';
-import { initializeApp } from 'firebase/app';
-import { getDoc, getFirestore } from 'firebase/firestore';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { collection, doc, getDocs } from "firebase/firestore"; 
+import { collection, getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAOnYfYcGgrz5CBwlSj3NTW-Rzo6hQ85A8",
-    authDomain: "anime-match-a5f94.firebaseapp.com",
-    projectId: "anime-match-a5f94",
-    storageBucket: "anime-match-a5f94.appspot.com",
-    messagingSenderId: "561233950151",
-    appId: "1:561233950151:web:84b1c7e0e5684b410a95e2",
-    measurementId: "G-WMRL0G5JYF"
+    apiKey: process.env.apiKey,
+    authDomain: process.env.authDomain,
+    projectId: process.env.projectId,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId: process.env.messagingSenderId,
+    appId: process.env.appId,
+    measurementId: process.envmeasurementId
 };
 
 const app = initializeApp(firebaseConfig); // initializes connection to firebase
@@ -22,40 +20,8 @@ const auth = getAuth(app); //get which user is authenticated
 const firestore = getFirestore(app); // returns firestore instance, Database Instance
 const querySnapshot = collection(firestore, "user") // grabs snapshot of collection, after updating from 'firebase/firestore/lite' to 'firebase/firestore'
 
-const colRef = collection(firestore, "users")
 
-
-const provider = new GoogleAuthProvider(); // used to help log in authentication
-
-//function getcollectiondata() {
-//    getDocs(querySnapshot)
-//        .then((snapshot) => {
-//        console.log("This is snapshot of collection data \n", snapshot.docs) // returns an array of objects
-//        let documents = [] // create new array to hold the data properties
-//        let animetitles = []
-//        snapshot.docs.forEach((doc) => {
-//            documents.push({ ...doc.data(), id: doc.id }) // create a new object to store into documents array
-//            if (doc.data().animetitle) {
-//                animetitles.push({ ...doc.data().animetitle, id: doc.id })
-//            }
-//        })
-//        console.log(documents)
-//        console.log(animetitles)
-//    })
-//    .catch(err => {
-//        console.log(err.message)
-//    })
-//    
-//}
-
-//function getuserdata() {
-//    const docRef = doc(firestore, 'user', 'rzcwz9Oc9LGBVGP4zFvr');
-//    
-//    getDoc(docRef)
-//        .then((doc) => {
-//            console.log("Doc Data \n", doc.data(), "This is the doc.id\n", doc.id)
-//        })
-//}
+const provider = new GoogleAuthProvider();
 
 function signInWithGoogle() {
     signInWithPopup(auth, provider)
@@ -77,4 +43,5 @@ function SignOut() {
       auth.signOut()
 };
 
-export { signInWithGoogle, auth, firestore, SignOut, querySnapshot };
+export { SignOut, auth, firestore, querySnapshot, signInWithGoogle };
+

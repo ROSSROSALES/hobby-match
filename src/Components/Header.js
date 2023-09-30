@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import BlenderIcon from '@mui/icons-material/Blender';
+import MenuIcon from '@mui/icons-material/Menu';
+import AppBar from '@mui/material/AppBar';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Toolbar from '@mui/material/Toolbar';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
 import { auth } from "../firebase";
@@ -58,14 +58,11 @@ function Header() {
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   function handleOpenNavMenu(event) {
-    console.log(event.currentTarget)
-    console.log("This opens the menu")
     setAnchorElNav(event.currentTarget);
   };
 
   function handleOpenUserMenu(event) {
     setAnchorElUser(event.currentTarget);
-    console.log(anchorElUser)
   };
 
   const handleCloseNavMenu = () => {
@@ -86,12 +83,12 @@ function Header() {
         <Toolbar disableGutters>
           <BlenderIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
-            variant="h6"
+            variant="h8"
             noWrap
             component="a"
             href="/"
             sx={{
-              mr: 2,
+              mr: 0,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
@@ -143,7 +140,7 @@ function Header() {
           </Box>
           <BlenderIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
-            variant="h5"
+            variant="h8"
             noWrap
             component="a"
             href=""
@@ -204,7 +201,7 @@ function Header() {
                 </Link>
               ))}
                 <MenuItem key="SignOut" onClick={SignOut}>
-                    <Typography color="black" textAlign="center">Signout</Typography>
+                    <Typography color="black" textAlign="center">Sign Out</Typography>
                 </MenuItem>
             </Menu>
           </Box>
@@ -215,4 +212,3 @@ function Header() {
 };
 
 export default Header;
-
