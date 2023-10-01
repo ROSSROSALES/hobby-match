@@ -6,19 +6,20 @@ import 'firebase/compat/firestore';
 import { collection, getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: process.env.apiKey,
-    authDomain: process.env.authDomain,
-    projectId: process.env.projectId,
-    storageBucket: process.env.storageBucket,
-    messagingSenderId: process.env.messagingSenderId,
-    appId: process.env.appId,
-    measurementId: process.envmeasurementId
+    apiKey: "AIzaSyAOnYfYcGgrz5CBwlSj3NTW-Rzo6hQ85A8",
+    authDomain: "anime-match-a5f94.firebaseapp.com",
+    projectId: "anime-match-a5f94",
+    storageBucket: "anime-match-a5f94.appspot.com",
+    messagingSenderId: "561233950151",
+    appId: "1:561233950151:web:84b1c7e0e5684b410a95e2",
+    measurementId: "G-WMRL0G5JYF"
 };
 
 const app = initializeApp(firebaseConfig); // initializes connection to firebase
 const auth = getAuth(app); //get which user is authenticated
 const firestore = getFirestore(app); // returns firestore instance, Database Instance
 const querySnapshot = collection(firestore, "user") // grabs snapshot of collection, after updating from 'firebase/firestore/lite' to 'firebase/firestore'
+
 
 
 const provider = new GoogleAuthProvider();
