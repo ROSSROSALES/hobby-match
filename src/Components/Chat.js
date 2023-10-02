@@ -1,6 +1,6 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
-import { addDoc, collection, getDocs, limit, orderBy, query } from "firebase/firestore";
+import { addDoc, collection, limit, orderBy, query } from "firebase/firestore";
 import React, { useRef, useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { auth, firestore } from "../firebase";
@@ -20,19 +20,8 @@ function Chat() {
 function ChatRoom() {
   const dummy = useRef();
   const messagesRef = collection(firestore, 'messages');
-  console.log(messagesRef)
   const query1 = query(messagesRef, orderBy('createdAt'), limit(25));
-  // const q = query(citiesRef, orderBy("name", "desc"), limit(3));
   const [messages] = useCollectionData(query1, { idField: 'id' });
-  //
-
-  const querySnapshot = getDocs(query1);
-  console.log("What is this info after getDocs gotta wait when quota is not exceeded", querySnapshot)
-
-//    querySnapshot.forEach((doc) => {
-//    console.log(doc.id, " => ", doc.data());
-//});
-  console.log("This is QUERY:", query1)
   const [formValue, setFormValue] = useState('');
 
   const { uid, photoURL } = auth.currentUser;
@@ -40,9 +29,6 @@ function ChatRoom() {
   const sendMessage = async (e) => {
     e.preventDefault();
 
-
-    // OLD     await messagesRef.add({
-    // addDoc(collection(firestore, 'users'), {
     await addDoc(messagesRef, {
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
