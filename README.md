@@ -10,6 +10,17 @@
 
 # Demo
 
+October 21, 2023  
+Added Dockerfile  
+How To:
+1. First build out docker image using the Dockerfile from main project dir
+2. `docker build -t [name image here]`
+3. Once the docker image id is built we can run it
+4. Since the Dockerfile created an image with EXPOSE to port 8080, but by default it is not accessible
+5. We use port forwarding Local:Container == 3000:8000 as seen below
+6. `docker run -p 3000:8080 [image id]`
+7. Open Localhost:3000
+
 
 - Home
 
