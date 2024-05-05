@@ -36,7 +36,7 @@ function History() {
     
     return (
         <>
-        <div className="toplist">
+        <div className="right-list">
         <Popup trigger=
             {<button class="button">  Delete All </button>}
             modal nested>

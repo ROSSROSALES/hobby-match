@@ -4,6 +4,13 @@ div {
 
 .list{
   margin: 20px;
+  /* display: flex; */
+}
+
+.right-list {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .partlist{
