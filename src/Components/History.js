@@ -46,12 +46,10 @@ function History() {
                         <div className='DeleteAllText'>
                             Are you sure you want to delete all?
                         </div>
-                        <div >
-                            <button className="button-popup" onClick=
-                                {() => {close(); deleteAllCells();}}>
-                                    Yes
-                            </button>
-                        </div>
+                        <button className="button-popup" onClick=
+                            {() => {close(); deleteAllCells();}}>
+                                Yes
+                        </button>
                     </div>
                 )
             }
