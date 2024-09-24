@@ -5,16 +5,6 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { collection, getFirestore } from 'firebase/firestore';
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAOnYfYcGgrz5CBwlSj3NTW-Rzo6hQ85A8",
-    authDomain: "anime-match-a5f94.firebaseapp.com",
-    projectId: "anime-match-a5f94",
-    storageBucket: "anime-match-a5f94.appspot.com",
-    messagingSenderId: "561233950151",
-    appId: "1:561233950151:web:84b1c7e0e5684b410a95e2",
-    measurementId: "G-WMRL0G5JYF"
-};
-
 const app = initializeApp(firebaseConfig); // initializes connection to firebase
 const auth = getAuth(app); //get which user is authenticated
 const firestore = getFirestore(app); // returns firestore instance, Database Instance
